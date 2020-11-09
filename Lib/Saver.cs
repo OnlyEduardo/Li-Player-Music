@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 
 namespace LiMusicPlayer.Lib
 {
@@ -11,14 +12,26 @@ namespace LiMusicPlayer.Lib
 
         public static void SaveFile()
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Path.Combine(folderToData, "dataconfig.dat"));
+            var bf = new BinaryFormatter();
 
-            SaveData save = new SaveData
+            if (!Directory.Exists(folderToData))
+                Directory.CreateDirectory(folderToData);
+
+            FileStream file;
+
+            try
             {
-                additionalFolders = Search.additionalFolders,
-                indexOfLastMusic = MainForm.actualIndex,
-                VolumeOfLastMusic = Music._volume
+                file = File.Create(Path.Combine(folderToData, "dataconfig.dat"));
+            }
+            catch { return; }
+            
+            var save = new SaveData
+            {
+                _additionalFolders = Search.additionalFolders,
+                _indexOfLastMusic = MainForm.INSTANCE.actualIndex,
+                _volumeOfLastMusic = MainForm.INSTANCE.actualVolume,
+                _durationlabel = Util.FormatNumber(MainForm.INSTANCE.actualMusic == null ? 0 
+                                                : (int)MainForm.INSTANCE.actualMusic.Player.currentMedia.duration),
             };
 
             bf.Serialize(file, save);
@@ -30,23 +43,32 @@ namespace LiMusicPlayer.Lib
             if (!File.Exists(Path.Combine(folderToData, "dataconfig.dat")))
                 return;
 
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Path.Combine(folderToData, "dataconfig.dat"), FileMode.Open);
+            var bf = new BinaryFormatter();
+            var file = File.Open(Path.Combine(folderToData, "dataconfig.dat"), FileMode.Open);
 
-            SaveData save = (SaveData) bf.Deserialize(file);
+            SaveData save;
+
+            try
+            {
+                 save = (SaveData)bf.Deserialize(file);
+            } catch { return; }
+            
             file.Close();
 
-            Search.additionalFolders = save.additionalFolders;
-            MainForm.actualIndex = save.indexOfLastMusic;
-            Music._volume = save.VolumeOfLastMusic;
+            Search.additionalFolders = save._additionalFolders;
+            MainForm.INSTANCE.actualIndex = save._indexOfLastMusic;
+            MainForm.INSTANCE.actualVolume = save._volumeOfLastMusic;
+            MainForm.INSTANCE.totalDurationTime.Text = save._durationlabel;
         }
     }
 
     [Serializable]
     public class SaveData
     {
-        public List<string> additionalFolders;
-        public int indexOfLastMusic;
-        public int VolumeOfLastMusic;
+        public List<string> _additionalFolders;
+        public int _indexOfLastMusic;
+        public int _volumeOfLastMusic;
+
+        public string _durationlabel;
     }
 }

@@ -73,29 +73,9 @@ namespace LiMusicPlayer.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap go_to_end_48px {
+        internal static System.Drawing.Bitmap LP_Logo_64px {
             get {
-                object obj = ResourceManager.GetObject("go_to_end_48px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap go_to_start_48px {
-            get {
-                object obj = ResourceManager.GetObject("go_to_start_48px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap musical_notes_96px {
-            get {
-                object obj = ResourceManager.GetObject("musical_notes_96px", resourceCulture);
+                object obj = ResourceManager.GetObject("LP_Logo_64px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

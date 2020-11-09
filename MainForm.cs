@@ -1,29 +1,37 @@
 ﻿using LiMusicPlayer.Lib;
 using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Diagnostics;
 using System.Windows.Forms;
-using WMPLib;
 
 namespace LiMusicPlayer
 {
     public partial class MainForm : Form
     {
-        private List<Music> MusicsList { get; } = new List<Music>();
-        public static int actualIndex = 0;
+        public static MainForm INSTANCE;
 
-        private Music actualMusic = null;
+        public int actualIndex = 0;
+        public int actualVolume = 50;
+        public Music actualMusic = null;
+
         private bool isPlaying = false;
-        private int actualVolume = 50;
-
+        
         public MainForm()
         {
+            if(INSTANCE == null)
+                INSTANCE = this;
+
             InitializeComponent();
             InitializeMusicsList();
             PopulateListOfAllMusic();
-            timer.Stop();     
+            LoadAndSetData();
+
         }
 
+        private List<Music> MusicsList { get; } = new List<Music>();
+        private List<Panel> Panels { get; } = new List<Panel>();
+
+        #region InitializeSystem
         private void InitializeMusicsList()
         {
             var musicsPaths = Search.GetMusicsPaths();
@@ -45,6 +53,42 @@ namespace LiMusicPlayer
             listBox.EndUpdate();
         }
 
+        private void LoadAndSetData()
+        {
+            Saver.LoadFile();
+            trackBar.Value = actualVolume / 10;
+            timer.Stop();
+            labelActualMusic.Text = MusicsList[actualIndex].ToString();
+        }
+
+        private void ListPanels()
+        {
+            Panels.Add(panelAllMusics);
+        }
+        #endregion
+
+        #region Side Panel Buttons
+        private void ShowAllMusics(object sender, EventArgs e)
+        {
+            SetPanelsOfExcept(panelAllMusics, panelAllMusics.Visible);
+        }
+
+
+        private void OpenMySite(object sender, EventArgs e)
+        {
+            try
+            {
+                var myProcess = new Process();
+                myProcess.StartInfo.UseShellExecute = true;
+                myProcess.StartInfo.FileName = "https://www.eduardo-ribeiro-leal.com";
+                myProcess.Start();
+            }
+            catch { }
+
+        }
+        #endregion
+
+        #region Player Buttons
         // Play Stop actual music
         private void PlayStopButtonClick(object sender, EventArgs e)
         {
@@ -95,16 +139,8 @@ namespace LiMusicPlayer
                 actualMusic.CurrentPosition = 0;
             }
 
-            if (isPlaying)
-            {
-                timer.Start();
-                actualMusic.Play();
-            }
-
-            PlayStopLabel.Image = isPlaying ? Properties.Resources.pause_64px : Properties.Resources.play_64px;
-
-            actualMusic.Volume(actualVolume);
-            labelActualMusic.Text = actualMusic.ToString();
+            isPlaying = !isPlaying;
+            PlayStopButtonClick(sender, e);
         }
 
         // Go to next music
@@ -126,16 +162,31 @@ namespace LiMusicPlayer
             
             actualMusic = MusicsList[actualIndex];
 
-            if (isPlaying)
+            isPlaying = !isPlaying;
+            PlayStopButtonClick(sender, e);
+        }
+
+        // Update volume
+        private void TrackBarScrolling(object sender, EventArgs e)
+        {
+            actualVolume = trackBar.Value * 10;
+
+            if (actualMusic != null)
+                actualMusic.Volume(actualVolume);
+        }
+        #endregion
+
+        // Panels configs
+        private void SetPanelsOfExcept(Panel exceptedPanel, bool oldState)
+        {
+            foreach(var panel in Panels)
             {
-                timer.Start();
-                actualMusic.Play();
+                panel.Visible = false;
+                panel.Enabled = false;
             }
 
-            PlayStopLabel.Image = isPlaying ? Properties.Resources.pause_64px : Properties.Resources.play_64px;
-
-            actualMusic.Volume(actualVolume);
-            labelActualMusic.Text = actualMusic.ToString();
+            exceptedPanel.Visible = !oldState;
+            exceptedPanel.Enabled = !oldState;
         }
 
         // Update progressBar
@@ -163,22 +214,17 @@ namespace LiMusicPlayer
             progressBar.Update();
         }
 
-        // Update volume
-        private void TrackBarScrolling(object sender, EventArgs e)
-        {
-            actualVolume = trackBar.Value * 10;
-
-            if (actualMusic != null)
-                actualMusic.Volume(actualVolume);
-        }
-
         // Select Music by listbox
         private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {  
-            var selectedIndex = listBox.SelectedIndex <= -1 ? 0 : listBox.SelectedIndex;  
+        {
+            if (listBox.SelectedIndex <= -1)
+                return;
+
+            var selectedIndex = listBox.SelectedIndex;  
             var selectedMusic = (Music) listBox.Items[selectedIndex];
 
-            Console.WriteLine(selectedMusic);
+            if (selectedMusic == actualMusic)
+                return;
 
             if (actualMusic != null)
             {
@@ -201,10 +247,12 @@ namespace LiMusicPlayer
             PlayStopButtonClick(sender, e);
         }
 
-        private void ButtonAllMusics_Click(object sender, EventArgs e)
+        // When closing save data
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            panelAllMusics.Visible = !panelAllMusics.Visible;
-            panelAllMusics.Enabled = panelAllMusics.Visible;
+            Saver.SaveFile();
         }
+
+        
     }
 }

@@ -2,10 +2,8 @@
 
 namespace LiMusicPlayer.Lib
 {
-    internal sealed class Music
+    public sealed class Music
     {
-        public static int _volume;
-
         public Music(string path)
         {
             Path = path;
@@ -50,7 +48,6 @@ namespace LiMusicPlayer.Lib
             if (vol > 100 || vol < 0 || Player == null)
                 return;
 
-            _volume = vol;
             Player.settings.volume = vol;
         }
 
