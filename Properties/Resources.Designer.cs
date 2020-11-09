@@ -93,6 +93,16 @@ namespace LiMusicPlayer.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap musical_notes_96px {
+            get {
+                object obj = ResourceManager.GetObject("musical_notes_96px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pause_64px {
             get {
                 object obj = ResourceManager.GetObject("pause_64px", resourceCulture);
