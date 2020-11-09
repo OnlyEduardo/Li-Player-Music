@@ -1,0 +1,12 @@
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\bin\Debug\Li Music Player.exe.config
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\bin\Debug\Li Music Player.exe
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\bin\Debug\Li Music Player.pdb
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.csprojAssemblyReference.cache
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.csproj.GenerateResource.cache
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.csproj.CoreCompileInputs.cache
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.exe
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.pdb
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Properties.Resources.resources
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.MainForm.resources
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.csproj.CopyComplete
