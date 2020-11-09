@@ -174,11 +174,13 @@ namespace LiMusicPlayer
 
         // Select Music by listbox
         private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {  
             var selectedIndex = listBox.SelectedIndex <= -1 ? 0 : listBox.SelectedIndex;  
             var selectedMusic = (Music) listBox.Items[selectedIndex];
 
-            if(actualMusic != null)
+            Console.WriteLine(selectedMusic);
+
+            if (actualMusic != null)
             {
                 if (isPlaying)
                 {
@@ -197,6 +199,12 @@ namespace LiMusicPlayer
                 isPlaying = false;
 
             PlayStopButtonClick(sender, e);
+        }
+
+        private void ButtonAllMusics_Click(object sender, EventArgs e)
+        {
+            panelAllMusics.Visible = !panelAllMusics.Visible;
+            panelAllMusics.Enabled = panelAllMusics.Visible;
         }
     }
 }

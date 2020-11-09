@@ -100,6 +100,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="Resources\pause_64px.png" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +123,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shuffle_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\musical_notes_96px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
