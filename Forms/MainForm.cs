@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace LiMusicPlayer
+namespace LiMusicPlayer.Forms
 {
     public partial class MainForm : Form
     {
@@ -13,66 +13,81 @@ namespace LiMusicPlayer
         public int actualIndex = 0;
         public int actualVolume = 50;
         public Music actualMusic = null;
+        public bool isPlaying = false;
 
-        private bool isPlaying = false;
-        
+        private readonly AllMusics allMusicsForm = new AllMusics();
+
         public MainForm()
         {
             if(INSTANCE == null)
                 INSTANCE = this;
 
             InitializeComponent();
-            InitializeMusicsList();
-            PopulateListOfAllMusic();
-            LoadAndSetData();
+            Saver.LoadFile();
 
+            PopulateFormsList();
+            HideAllExternalForms();
+            InitializeMusicsList();
+            SetLoadedData();         
+
+            // Load Form Initializators
+            AllMusics.INSTANCE.PopulateListOfAllMusic();
         }
 
-        private List<Music> MusicsList { get; } = new List<Music>();
-        private List<Panel> Panels { get; } = new List<Panel>();
-
+        public List<Music> MusicsList { get; } = new List<Music>();
+        public List<Form> Forms { get; } = new List<Form>();
+       
         #region InitializeSystem
+        private void PopulateFormsList()
+        {
+            Forms.Add(allMusicsForm);
+        }
+
+        private void HideAllExternalForms()
+        {
+            foreach(var form in Forms)
+            {
+                form.Visible = false;
+                form.Enabled = false;
+                form.TopLevel = false;
+                form.Dock = DockStyle.Fill;
+                mainPanel.Controls.Add(form);     
+            }
+        }
+
         private void InitializeMusicsList()
         {
             var musicsPaths = Search.GetMusicsPaths();
 
             foreach (var mpath in musicsPaths)
                 MusicsList.Add(new Music(mpath));
-        }
+        }     
 
-        private void PopulateListOfAllMusic()
-        {
-            listBox.SelectionMode = SelectionMode.MultiExtended;
-            listBox.BeginUpdate();
-
-            for (int x = 0; x < MusicsList.Count; x++)
-            {
-                listBox.Items.Add(MusicsList[x]);
-            }
-
-            listBox.EndUpdate();
-        }
-
-        private void LoadAndSetData()
-        {
-            Saver.LoadFile();
+        private void SetLoadedData()
+        {      
             trackBar.Value = actualVolume / 10;
             timer.Stop();
             labelActualMusic.Text = MusicsList[actualIndex].ToString();
-        }
-
-        private void ListPanels()
-        {
-            Panels.Add(panelAllMusics);
         }
         #endregion
 
         #region Side Panel Buttons
         private void ShowAllMusics(object sender, EventArgs e)
         {
-            SetPanelsOfExcept(panelAllMusics, panelAllMusics.Visible);
-        }
 
+            if (!mainPanel.Visible)
+            {
+                mainPanel.Visible = true;
+                mainPanel.Enabled = true;
+                TurnOnFormAndCloseOthers(allMusicsForm);
+            }         
+            else
+            {
+                mainPanel.Visible = false;
+                mainPanel.Enabled = false;
+                TurnOffAllForms();
+            }        
+        }
 
         private void OpenMySite(object sender, EventArgs e)
         {
@@ -90,7 +105,7 @@ namespace LiMusicPlayer
 
         #region Player Buttons
         // Play Stop actual music
-        private void PlayStopButtonClick(object sender, EventArgs e)
+        public void PlayStopButtonClick(object sender, EventArgs e)
         {
             isPlaying = !isPlaying;
 
@@ -109,6 +124,9 @@ namespace LiMusicPlayer
                 actualMusic.Stop();
                 timer.Stop();
             }
+
+            for(var i = 0; i < AllMusics.INSTANCE.listBox.Items.Count; i++)
+                AllMusics.INSTANCE.listBox.SetSelected(i, false);
 
             labelActualMusic.Text = actualMusic.ToString();
         }
@@ -176,19 +194,6 @@ namespace LiMusicPlayer
         }
         #endregion
 
-        // Panels configs
-        private void SetPanelsOfExcept(Panel exceptedPanel, bool oldState)
-        {
-            foreach(var panel in Panels)
-            {
-                panel.Visible = false;
-                panel.Enabled = false;
-            }
-
-            exceptedPanel.Visible = !oldState;
-            exceptedPanel.Enabled = !oldState;
-        }
-
         // Update progressBar
         private void TimerTick(object sender, EventArgs e)
         {
@@ -214,45 +219,42 @@ namespace LiMusicPlayer
             progressBar.Update();
         }
 
-        // Select Music by listbox
-        private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listBox.SelectedIndex <= -1)
-                return;
-
-            var selectedIndex = listBox.SelectedIndex;  
-            var selectedMusic = (Music) listBox.Items[selectedIndex];
-
-            if (selectedMusic == actualMusic)
-                return;
-
-            if (actualMusic != null)
-            {
-                if (isPlaying)
-                {
-                    timer.Stop();
-                    actualMusic.Stop();
-                }
-
-                actualMusic.CurrentPosition = 0;
-                progressBar.Value = 0;
-            }
-
-            actualIndex = selectedIndex;
-            actualMusic = selectedMusic;
-
-            if (isPlaying)
-                isPlaying = false;
-
-            PlayStopButtonClick(sender, e);
-        }
-
         // When closing save data
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Saver.SaveFile();
         }
 
-        
+        // Clicking in Logo
+        private void Logolabel_Click(object sender, EventArgs e)
+        {
+            mainPanel.Visible = false;
+            mainPanel.Enabled = false;
+        }
+
+        private void TurnOffAllForms()
+        {
+            foreach (var form in Forms)
+            {
+                form.Visible = false;
+                form.Enabled = false;
+            }
+        }
+
+        private void TurnOnFormAndCloseOthers(Form exceptedForm)
+        {
+            foreach(var form in Forms)
+            {
+                if(form == exceptedForm)
+                {
+                    form.Visible = true;
+                    form.Enabled = true;
+                    continue;
+                }
+
+                form.Visible = false;
+                form.Enabled = false;
+            }
+        }
     }
 }

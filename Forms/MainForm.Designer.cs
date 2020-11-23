@@ -1,4 +1,4 @@
-﻿namespace LiMusicPlayer
+﻿namespace LiMusicPlayer.Forms
 {
     partial class MainForm
     {
@@ -44,19 +44,16 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.sidePanel = new System.Windows.Forms.Panel();
+            this.buttonAbout = new System.Windows.Forms.Button();
             this.buttonAllMusics = new System.Windows.Forms.Button();
             this.Logolabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panelAllMusics = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.listBox = new System.Windows.Forms.ListBox();
-            this.buttonAbout = new System.Windows.Forms.Button();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.panelBottom.SuspendLayout();
             this.panelButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.sidePanel.SuspendLayout();
-            this.panelAllMusics.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelBottom
@@ -82,9 +79,9 @@
             this.panelButtons.Controls.Add(this.PlayStopLabel);
             this.panelButtons.Controls.Add(this.GoToStart);
             this.panelButtons.Controls.Add(this.LoopMusic);
-            this.panelButtons.Location = new System.Drawing.Point(167, 36);
+            this.panelButtons.Location = new System.Drawing.Point(166, 50);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(735, 100);
+            this.panelButtons.Size = new System.Drawing.Size(735, 78);
             this.panelButtons.TabIndex = 9;
             // 
             // ShuffleMusic
@@ -92,7 +89,7 @@
             this.ShuffleMusic.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ShuffleMusic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ShuffleMusic.Image = global::LiMusicPlayer.Properties.Resources.shuffle_48px;
-            this.ShuffleMusic.Location = new System.Drawing.Point(671, 20);
+            this.ShuffleMusic.Location = new System.Drawing.Point(671, 9);
             this.ShuffleMusic.Name = "ShuffleMusic";
             this.ShuffleMusic.Size = new System.Drawing.Size(64, 64);
             this.ShuffleMusic.TabIndex = 5;
@@ -102,7 +99,7 @@
             this.GoToNextMusic.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.GoToNextMusic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.GoToNextMusic.Image = global::LiMusicPlayer.Properties.Resources.end_48px;
-            this.GoToNextMusic.Location = new System.Drawing.Point(521, 20);
+            this.GoToNextMusic.Location = new System.Drawing.Point(521, 9);
             this.GoToNextMusic.Name = "GoToNextMusic";
             this.GoToNextMusic.Size = new System.Drawing.Size(64, 64);
             this.GoToNextMusic.TabIndex = 2;
@@ -113,7 +110,7 @@
             this.PlayStopLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.PlayStopLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PlayStopLabel.Image = global::LiMusicPlayer.Properties.Resources.play_64px;
-            this.PlayStopLabel.Location = new System.Drawing.Point(300, 20);
+            this.PlayStopLabel.Location = new System.Drawing.Point(300, 9);
             this.PlayStopLabel.Name = "PlayStopLabel";
             this.PlayStopLabel.Size = new System.Drawing.Size(135, 64);
             this.PlayStopLabel.TabIndex = 1;
@@ -124,7 +121,7 @@
             this.GoToStart.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.GoToStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.GoToStart.Image = global::LiMusicPlayer.Properties.Resources.skip_to_start_48px;
-            this.GoToStart.Location = new System.Drawing.Point(150, 20);
+            this.GoToStart.Location = new System.Drawing.Point(150, 9);
             this.GoToStart.Name = "GoToStart";
             this.GoToStart.Size = new System.Drawing.Size(64, 64);
             this.GoToStart.TabIndex = 3;
@@ -135,7 +132,7 @@
             this.LoopMusic.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.LoopMusic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LoopMusic.Image = global::LiMusicPlayer.Properties.Resources.repeat_48px;
-            this.LoopMusic.Location = new System.Drawing.Point(0, 20);
+            this.LoopMusic.Location = new System.Drawing.Point(0, 9);
             this.LoopMusic.Name = "LoopMusic";
             this.LoopMusic.Size = new System.Drawing.Size(64, 64);
             this.LoopMusic.TabIndex = 4;
@@ -218,6 +215,22 @@
             this.sidePanel.Size = new System.Drawing.Size(250, 773);
             this.sidePanel.TabIndex = 2;
             // 
+            // buttonAbout
+            // 
+            this.buttonAbout.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonAbout.FlatAppearance.BorderSize = 0;
+            this.buttonAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAbout.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAbout.ForeColor = System.Drawing.Color.White;
+            this.buttonAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAbout.Location = new System.Drawing.Point(0, 723);
+            this.buttonAbout.Name = "buttonAbout";
+            this.buttonAbout.Size = new System.Drawing.Size(250, 50);
+            this.buttonAbout.TabIndex = 3;
+            this.buttonAbout.Text = "Sobre";
+            this.buttonAbout.UseVisualStyleBackColor = true;
+            this.buttonAbout.Click += new System.EventHandler(this.OpenMySite);
+            // 
             // buttonAllMusics
             // 
             this.buttonAllMusics.Dock = System.Windows.Forms.DockStyle.Top;
@@ -237,12 +250,14 @@
             // Logolabel
             // 
             this.Logolabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(5)))), ((int)(((byte)(17)))));
+            this.Logolabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Logolabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.Logolabel.Image = global::LiMusicPlayer.Properties.Resources.LP_Logo_64px;
             this.Logolabel.Location = new System.Drawing.Point(0, 0);
             this.Logolabel.Name = "Logolabel";
             this.Logolabel.Size = new System.Drawing.Size(250, 161);
             this.Logolabel.TabIndex = 1;
+            this.Logolabel.Click += new System.EventHandler(this.Logolabel_Click);
             // 
             // label1
             // 
@@ -271,64 +286,16 @@
             this.label2.Text = "Feito por: Eduardo Ribeiro Leal";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panelAllMusics
+            // mainPanel
             // 
-            this.panelAllMusics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelAllMusics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            this.panelAllMusics.Controls.Add(this.label3);
-            this.panelAllMusics.Controls.Add(this.listBox);
-            this.panelAllMusics.Enabled = false;
-            this.panelAllMusics.Location = new System.Drawing.Point(250, 0);
-            this.panelAllMusics.Name = "panelAllMusics";
-            this.panelAllMusics.Size = new System.Drawing.Size(1112, 602);
-            this.panelAllMusics.TabIndex = 5;
-            this.panelAllMusics.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(1112, 64);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Todas as músicas";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // listBox
-            // 
-            this.listBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(5)))), ((int)(((byte)(32)))));
-            this.listBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listBox.CausesValidation = false;
-            this.listBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox.ForeColor = System.Drawing.Color.White;
-            this.listBox.FormattingEnabled = true;
-            this.listBox.ItemHeight = 31;
-            this.listBox.Location = new System.Drawing.Point(0, 166);
-            this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(1112, 436);
-            this.listBox.TabIndex = 7;
-            this.listBox.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
-            // 
-            // buttonAbout
-            // 
-            this.buttonAbout.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonAbout.FlatAppearance.BorderSize = 0;
-            this.buttonAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAbout.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAbout.ForeColor = System.Drawing.Color.White;
-            this.buttonAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAbout.Location = new System.Drawing.Point(0, 723);
-            this.buttonAbout.Name = "buttonAbout";
-            this.buttonAbout.Size = new System.Drawing.Size(250, 50);
-            this.buttonAbout.TabIndex = 3;
-            this.buttonAbout.Text = "Sobre";
-            this.buttonAbout.UseVisualStyleBackColor = true;
-            this.buttonAbout.Click += new System.EventHandler(this.OpenMySite);
+            this.mainPanel.Location = new System.Drawing.Point(250, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(1112, 600);
+            this.mainPanel.TabIndex = 5;
+            this.mainPanel.Visible = false;
             // 
             // MainForm
             // 
@@ -336,7 +303,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(1362, 773);
-            this.Controls.Add(this.panelAllMusics);
+            this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panelBottom);
@@ -352,16 +319,13 @@
             this.panelButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.sidePanel.ResumeLayout(false);
-            this.panelAllMusics.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Panel panelBottom;
-        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label PlayStopLabel;
-        private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label GoToNextMusic;
         private System.Windows.Forms.Label GoToStart;
         private System.Windows.Forms.Panel sidePanel;
@@ -376,10 +340,10 @@
         public System.Windows.Forms.Label totalDurationTime;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panelAllMusics;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.Button buttonAbout;
+        public System.Windows.Forms.Timer timer;
+        public System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Panel mainPanel;
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiMusicPlayer.Forms;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -9,6 +10,7 @@ namespace LiMusicPlayer.Lib
     public sealed class Saver
     {
         private static readonly string folderToData = $"{Search.HDName}Users\\Public\\LMPlayer";
+        private static readonly string archiveName = "dataconfig.dat";
 
         public static void SaveFile()
         {
@@ -21,7 +23,7 @@ namespace LiMusicPlayer.Lib
 
             try
             {
-                file = File.Create(Path.Combine(folderToData, "dataconfig.dat"));
+                file = File.Create(Path.Combine(folderToData, archiveName));
             }
             catch { return; }
             
@@ -40,11 +42,11 @@ namespace LiMusicPlayer.Lib
 
         public static void LoadFile()
         {
-            if (!File.Exists(Path.Combine(folderToData, "dataconfig.dat")))
+            if (!File.Exists(Path.Combine(folderToData, archiveName)))
                 return;
 
             var bf = new BinaryFormatter();
-            var file = File.Open(Path.Combine(folderToData, "dataconfig.dat"), FileMode.Open);
+            var file = File.Open(Path.Combine(folderToData, archiveName), FileMode.Open);
 
             SaveData save;
 

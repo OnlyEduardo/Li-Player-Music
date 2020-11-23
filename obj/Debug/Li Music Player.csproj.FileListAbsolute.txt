@@ -7,6 +7,7 @@ C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Musi
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.exe
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.pdb
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Properties.Resources.resources
-C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.MainForm.resources
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\bin\Debug\AxInterop.WMPLib.dll
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.csproj.CopyComplete
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Forms.AllMusics.resources
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Forms.MainForm.resources

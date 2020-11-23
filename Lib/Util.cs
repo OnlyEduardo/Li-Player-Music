@@ -1,4 +1,4 @@
-﻿namespace LiMusicPlayer
+﻿namespace LiMusicPlayer.Lib
 {
     internal sealed class Util
     {

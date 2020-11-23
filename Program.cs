@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiMusicPlayer.Forms;
+using System;
 using System.Windows.Forms;
 
 namespace LiMusicPlayer
