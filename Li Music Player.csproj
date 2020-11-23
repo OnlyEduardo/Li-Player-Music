@@ -86,6 +86,7 @@
     <Compile Include="Forms\AllMusics.Designer.cs">
       <DependentUpon>AllMusics.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lib\Playlist.cs" />
     <Compile Include="Lib\Saver.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -160,6 +161,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="LP_Logo_64px.ico" />
+    <None Include="Resources\speedometer_64px.png" />
     <None Include="Resources\LP_Logo_64px.png" />
   </ItemGroup>
   <ItemGroup>

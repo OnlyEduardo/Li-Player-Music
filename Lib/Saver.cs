@@ -30,10 +30,10 @@ namespace LiMusicPlayer.Lib
             var save = new SaveData
             {
                 _additionalFolders = Search.additionalFolders,
-                _indexOfLastMusic = MainForm.INSTANCE.actualIndex,
-                _volumeOfLastMusic = MainForm.INSTANCE.actualVolume,
-                _durationlabel = Util.FormatNumber(MainForm.INSTANCE.actualMusic == null ? 0 
-                                                : (int)MainForm.INSTANCE.actualMusic.Player.currentMedia.duration),
+                _indexOfLastMusic = MainForm.INSTANCE._actualIndex,
+                _volumeOfLastMusic = MainForm.INSTANCE._actualVolume,
+                _durationlabel = Util.FormatNumber(MainForm.INSTANCE._actualMusic == null ? 0 
+                                                : (int)MainForm.INSTANCE._actualMusic.Player.currentMedia.duration),
             };
 
             bf.Serialize(file, save);
@@ -58,8 +58,8 @@ namespace LiMusicPlayer.Lib
             file.Close();
 
             Search.additionalFolders = save._additionalFolders;
-            MainForm.INSTANCE.actualIndex = save._indexOfLastMusic;
-            MainForm.INSTANCE.actualVolume = save._volumeOfLastMusic;
+            MainForm.INSTANCE._actualIndex = save._indexOfLastMusic;
+            MainForm.INSTANCE._actualVolume = save._volumeOfLastMusic;
             MainForm.INSTANCE.totalDurationTime.Text = save._durationlabel;
         }
     }

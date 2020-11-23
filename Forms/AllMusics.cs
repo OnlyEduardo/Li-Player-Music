@@ -44,26 +44,26 @@ namespace LiMusicPlayer.Forms
             var selectedIndex = listBox.SelectedIndex;
             var selectedMusic = (Music)listBox.Items[selectedIndex];
 
-            if (selectedMusic == MainForm.INSTANCE.actualMusic)
+            if (selectedMusic == MainForm.INSTANCE._actualMusic)
                 return;
 
-            if (MainForm.INSTANCE.actualMusic != null)
+            if (MainForm.INSTANCE._actualMusic != null)
             {
-                if (MainForm.INSTANCE.isPlaying)
+                if (MainForm.INSTANCE._isPlaying)
                 {
                     MainForm.INSTANCE.timer.Stop();
-                    MainForm.INSTANCE.actualMusic.Stop();
+                    MainForm.INSTANCE._actualMusic.Stop();
                 }
 
-                MainForm.INSTANCE.actualMusic.CurrentPosition = 0;
+                MainForm.INSTANCE._actualMusic.CurrentPosition = 0;
                 MainForm.INSTANCE.progressBar.Value = 0;
             }
 
-            MainForm.INSTANCE.actualIndex = selectedIndex;
-            MainForm.INSTANCE.actualMusic = selectedMusic;
+            MainForm.INSTANCE._actualIndex = selectedIndex;
+            MainForm.INSTANCE._actualMusic = selectedMusic;
 
-            if (MainForm.INSTANCE.isPlaying)
-                MainForm.INSTANCE.isPlaying = false;
+            if (MainForm.INSTANCE._isPlaying)
+                MainForm.INSTANCE._isPlaying = false;
 
             MainForm.INSTANCE.PlayStopButtonClick(sender, e);
         }

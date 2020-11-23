@@ -1,4 +1,5 @@
-﻿using WMPLib;
+﻿using System;
+using WMPLib;
 
 namespace LiMusicPlayer.Lib
 {
@@ -12,9 +13,9 @@ namespace LiMusicPlayer.Lib
         }
 
         public string Path { get; }
-
         public WindowsMediaPlayer Player { get; } = new WindowsMediaPlayer();
         public double CurrentPosition { get; set; }
+
         public int Duration
         {
             get
@@ -51,6 +52,12 @@ namespace LiMusicPlayer.Lib
             Player.settings.volume = vol;
         }
 
+        public void Rate(int rate = 1)
+        {
+            if (rate >= 1 && rate <= 4 && Player != null)
+                Player.settings.rate = rate;
+        }
+
         public override string ToString()
         {
             var parts = Path.Split('\\');
@@ -69,10 +76,13 @@ namespace LiMusicPlayer.Lib
         {
             if ((WMPPlayState) NewState == WMPPlayState.wmppsStopped)
                 Player.controls.stop();
+
+            
         }
+
         private void PlayerMediaError(object pMediaObject)
         {
-            Player.controls.stop();
+            Player.controls.stop();           
         }
     }
 }

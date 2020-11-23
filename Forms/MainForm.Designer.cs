@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panelBottom = new System.Windows.Forms.Panel();
+            this.speedometer = new System.Windows.Forms.Label();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.ShuffleMusic = new System.Windows.Forms.Label();
             this.GoToNextMusic = new System.Windows.Forms.Label();
@@ -44,21 +45,31 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.sidePanel = new System.Windows.Forms.Panel();
-            this.buttonAbout = new System.Windows.Forms.Button();
+            this.panelEdit = new System.Windows.Forms.Panel();
+            this.removeFolderButton = new System.Windows.Forms.Button();
+            this.addFolderButton = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.panelPlaylists = new System.Windows.Forms.Panel();
             this.buttonAllMusics = new System.Windows.Forms.Button();
+            this.buttonPlaylists = new System.Windows.Forms.Button();
+            this.buttonAbout = new System.Windows.Forms.Button();
             this.Logolabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panelBottom.SuspendLayout();
             this.panelButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.sidePanel.SuspendLayout();
+            this.panelEdit.SuspendLayout();
+            this.panelPlaylists.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelBottom
             // 
             this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.panelBottom.Controls.Add(this.speedometer);
             this.panelBottom.Controls.Add(this.panelButtons);
             this.panelBottom.Controls.Add(this.totalDurationTime);
             this.panelBottom.Controls.Add(this.timeProgressLabel);
@@ -70,6 +81,21 @@
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(1112, 173);
             this.panelBottom.TabIndex = 1;
+            // 
+            // speedometer
+            // 
+            this.speedometer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.speedometer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.speedometer.Font = new System.Drawing.Font("OpenSymbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.speedometer.ForeColor = System.Drawing.Color.Red;
+            this.speedometer.Image = global::LiMusicPlayer.Properties.Resources.speedometer_64px;
+            this.speedometer.Location = new System.Drawing.Point(936, 50);
+            this.speedometer.Name = "speedometer";
+            this.speedometer.Size = new System.Drawing.Size(89, 78);
+            this.speedometer.TabIndex = 10;
+            this.speedometer.Text = "1x";
+            this.speedometer.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.speedometer.Click += new System.EventHandler(this.Speedometer_Click);
             // 
             // panelButtons
             // 
@@ -206,14 +232,121 @@
             // sidePanel
             // 
             this.sidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(5)))), ((int)(((byte)(17)))));
+            this.sidePanel.Controls.Add(this.panelEdit);
+            this.sidePanel.Controls.Add(this.buttonEdit);
+            this.sidePanel.Controls.Add(this.panelPlaylists);
+            this.sidePanel.Controls.Add(this.buttonPlaylists);
             this.sidePanel.Controls.Add(this.buttonAbout);
-            this.sidePanel.Controls.Add(this.buttonAllMusics);
             this.sidePanel.Controls.Add(this.Logolabel);
             this.sidePanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidePanel.Location = new System.Drawing.Point(0, 0);
             this.sidePanel.Name = "sidePanel";
             this.sidePanel.Size = new System.Drawing.Size(250, 773);
             this.sidePanel.TabIndex = 2;
+            // 
+            // panelEdit
+            // 
+            this.panelEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(5)))), ((int)(((byte)(25)))));
+            this.panelEdit.Controls.Add(this.removeFolderButton);
+            this.panelEdit.Controls.Add(this.addFolderButton);
+            this.panelEdit.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelEdit.Location = new System.Drawing.Point(0, 311);
+            this.panelEdit.Name = "panelEdit";
+            this.panelEdit.Size = new System.Drawing.Size(250, 100);
+            this.panelEdit.TabIndex = 7;
+            // 
+            // removeFolderButton
+            // 
+            this.removeFolderButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(5)))), ((int)(((byte)(30)))));
+            this.removeFolderButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.removeFolderButton.FlatAppearance.BorderSize = 0;
+            this.removeFolderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removeFolderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeFolderButton.ForeColor = System.Drawing.Color.White;
+            this.removeFolderButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.removeFolderButton.Location = new System.Drawing.Point(0, 50);
+            this.removeFolderButton.Name = "removeFolderButton";
+            this.removeFolderButton.Size = new System.Drawing.Size(250, 50);
+            this.removeFolderButton.TabIndex = 4;
+            this.removeFolderButton.Text = "Remover pasta";
+            this.removeFolderButton.UseVisualStyleBackColor = false;
+            this.removeFolderButton.Click += new System.EventHandler(this.RemoveFolderButton_Click);
+            // 
+            // addFolderButton
+            // 
+            this.addFolderButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(5)))), ((int)(((byte)(30)))));
+            this.addFolderButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.addFolderButton.FlatAppearance.BorderSize = 0;
+            this.addFolderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addFolderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addFolderButton.ForeColor = System.Drawing.Color.White;
+            this.addFolderButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.addFolderButton.Location = new System.Drawing.Point(0, 0);
+            this.addFolderButton.Name = "addFolderButton";
+            this.addFolderButton.Size = new System.Drawing.Size(250, 50);
+            this.addFolderButton.TabIndex = 3;
+            this.addFolderButton.Text = "Adicionar pasta";
+            this.addFolderButton.UseVisualStyleBackColor = false;
+            this.addFolderButton.Click += new System.EventHandler(this.AddFolderButton_Click);
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonEdit.FlatAppearance.BorderSize = 0;
+            this.buttonEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEdit.ForeColor = System.Drawing.Color.White;
+            this.buttonEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonEdit.Location = new System.Drawing.Point(0, 261);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(250, 50);
+            this.buttonEdit.TabIndex = 6;
+            this.buttonEdit.Text = "Editar";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
+            // 
+            // panelPlaylists
+            // 
+            this.panelPlaylists.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(5)))), ((int)(((byte)(25)))));
+            this.panelPlaylists.Controls.Add(this.buttonAllMusics);
+            this.panelPlaylists.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelPlaylists.Location = new System.Drawing.Point(0, 211);
+            this.panelPlaylists.Name = "panelPlaylists";
+            this.panelPlaylists.Size = new System.Drawing.Size(250, 50);
+            this.panelPlaylists.TabIndex = 5;
+            // 
+            // buttonAllMusics
+            // 
+            this.buttonAllMusics.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(5)))), ((int)(((byte)(30)))));
+            this.buttonAllMusics.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonAllMusics.FlatAppearance.BorderSize = 0;
+            this.buttonAllMusics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAllMusics.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAllMusics.ForeColor = System.Drawing.Color.White;
+            this.buttonAllMusics.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAllMusics.Location = new System.Drawing.Point(0, 0);
+            this.buttonAllMusics.Name = "buttonAllMusics";
+            this.buttonAllMusics.Size = new System.Drawing.Size(250, 50);
+            this.buttonAllMusics.TabIndex = 2;
+            this.buttonAllMusics.Text = "Todas músicas";
+            this.buttonAllMusics.UseVisualStyleBackColor = false;
+            this.buttonAllMusics.Click += new System.EventHandler(this.ShowAllMusics);
+            // 
+            // buttonPlaylists
+            // 
+            this.buttonPlaylists.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonPlaylists.FlatAppearance.BorderSize = 0;
+            this.buttonPlaylists.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlaylists.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPlaylists.ForeColor = System.Drawing.Color.White;
+            this.buttonPlaylists.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonPlaylists.Location = new System.Drawing.Point(0, 161);
+            this.buttonPlaylists.Name = "buttonPlaylists";
+            this.buttonPlaylists.Size = new System.Drawing.Size(250, 50);
+            this.buttonPlaylists.TabIndex = 4;
+            this.buttonPlaylists.Text = "Playlists";
+            this.buttonPlaylists.UseVisualStyleBackColor = true;
+            this.buttonPlaylists.Click += new System.EventHandler(this.ButtonPlaylists_Click);
             // 
             // buttonAbout
             // 
@@ -230,22 +363,6 @@
             this.buttonAbout.Text = "Sobre";
             this.buttonAbout.UseVisualStyleBackColor = true;
             this.buttonAbout.Click += new System.EventHandler(this.OpenMySite);
-            // 
-            // buttonAllMusics
-            // 
-            this.buttonAllMusics.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonAllMusics.FlatAppearance.BorderSize = 0;
-            this.buttonAllMusics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAllMusics.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAllMusics.ForeColor = System.Drawing.Color.White;
-            this.buttonAllMusics.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAllMusics.Location = new System.Drawing.Point(0, 161);
-            this.buttonAllMusics.Name = "buttonAllMusics";
-            this.buttonAllMusics.Size = new System.Drawing.Size(250, 50);
-            this.buttonAllMusics.TabIndex = 2;
-            this.buttonAllMusics.Text = "Músicas";
-            this.buttonAllMusics.UseVisualStyleBackColor = true;
-            this.buttonAllMusics.Click += new System.EventHandler(this.ShowAllMusics);
             // 
             // Logolabel
             // 
@@ -309,7 +426,7 @@
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.sidePanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1222, 820);
+            this.MinimumSize = new System.Drawing.Size(1380, 820);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Li Music Player";
@@ -319,6 +436,8 @@
             this.panelButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.sidePanel.ResumeLayout(false);
+            this.panelEdit.ResumeLayout(false);
+            this.panelPlaylists.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -344,6 +463,14 @@
         public System.Windows.Forms.Timer timer;
         public System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Panel mainPanel;
+        private System.Windows.Forms.Label speedometer;
+        private System.Windows.Forms.Button buttonPlaylists;
+        private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Panel panelEdit;
+        private System.Windows.Forms.Button removeFolderButton;
+        private System.Windows.Forms.Button addFolderButton;
+        public System.Windows.Forms.Panel panelPlaylists;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 
