@@ -22,6 +22,7 @@ namespace LiMusicPlayer.Forms
         
         // Declaration of external forms
         private readonly AllMusicsForm _allMusicsForm = new AllMusicsForm();
+        private readonly LibraryForm _libraryForm = new LibraryForm();
 
         public MainForm()
         {
@@ -40,6 +41,7 @@ namespace LiMusicPlayer.Forms
 
             // Load Form Initializators
             AllMusicsForm.INSTANCE.PopulateListOfAllMusic();
+            LibraryForm.INSTANCE.PopulateListOfFolders();
         }
 
         public List<Playlist> Playlists { get; } = new List<Playlist>();
@@ -49,8 +51,10 @@ namespace LiMusicPlayer.Forms
         #region InitializeSystem
         private void AddToolTipsForLabels()
         {
-            ToolTip toolTip = new ToolTip();
-            toolTip.InitialDelay = 1500;
+            ToolTip toolTip = new ToolTip
+            {
+                InitialDelay = 1500
+            };
 
             toolTip.SetToolTip(LoopMusic, "Ativa/Desativa o looping da música atual.");
             toolTip.SetToolTip(GoBack, "Volta 10 segundos na música atual.");
@@ -66,6 +70,7 @@ namespace LiMusicPlayer.Forms
         private void PopulateFormsList()
         {
             Forms.Add(_allMusicsForm);
+            Forms.Add(_libraryForm);
         }
 
         // Set visible and enable to false, for all External Forms
@@ -94,18 +99,15 @@ namespace LiMusicPlayer.Forms
         private void SetLoadedData()
         {      
             trackBar.Value = _actualVolume / 10;
-
             progressBar.Maximum = _lastDuration;
-            progressBar.Value = _currentPosition;
-            timeProgressLabel.Text = Util.FormatNumber(_currentPosition);
-
             timer.Stop();
 
             try
             {
+                progressBar.Value = _currentPosition;
+                timeProgressLabel.Text = Util.FormatNumber(_currentPosition);
                 labelActualMusic.Text = MusicsList[_actualIndex].ToString();
-            } catch (ArgumentOutOfRangeException)
-            {
+            } catch (ArgumentOutOfRangeException) {
                 labelActualMusic.Text = MusicsList[0].ToString();
             }
         }
@@ -119,18 +121,38 @@ namespace LiMusicPlayer.Forms
             mainPanel.Enabled = false;
         }
 
-        // Open/Close playlistPanel
-        private void ButtonPlaylists_Click(object sender, EventArgs e)
+        // Show main Playlist, all musics
+        private void ShowAllMusics_Click(object sender, EventArgs e)
         {
-            panelPlaylists.Visible = !panelPlaylists.Visible;
-            panelPlaylists.Height = (panelPlaylists.Controls.Count * 50) + 1;
+            if (!mainPanel.Visible)
+            {
+                mainPanel.Visible = true;
+                mainPanel.Enabled = true;
+                TurnOnFormAndCloseOthers(_allMusicsForm);
+            }
+            else
+            {
+                mainPanel.Visible = false;
+                mainPanel.Enabled = false;
+                TurnOffAllForms();
+            }     
         }
 
-        // Open/Close editPanel
-        private void ButtonEdit_Click(object sender, EventArgs e)
+        // Open/Close library panel
+        private void ButtonLibrary_Click(object sender, EventArgs e)
         {
-            panelEdit.Visible = !panelEdit.Visible;
-            panelEdit.Height = (panelEdit.Controls.Count * 50) + 1;
+            if (!mainPanel.Visible)
+            {
+                mainPanel.Visible = true;
+                mainPanel.Enabled = true;
+                TurnOnFormAndCloseOthers(_libraryForm);
+            }
+            else
+            {
+                mainPanel.Visible = false;
+                mainPanel.Enabled = false;
+                TurnOffAllForms();
+            }
         }
         
         // Open in default browser the link of my site
@@ -145,72 +167,6 @@ namespace LiMusicPlayer.Forms
             }
             catch { }
 
-        }
-        #endregion
-
-        #region SubPanel Buttons
-        // Add folder to library
-        private void AddFolderButton_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.Description = "Pasta a ser adicionada a biblioteca";
-            var dialog = folderBrowserDialog1.ShowDialog();
-
-            if (dialog.Equals(DialogResult.OK))
-            {
-                var addDir = folderBrowserDialog1.SelectedPath;
-
-                if (Search.additionalFolders.Contains(addDir) || Search.DefaultPaths.Contains(addDir))
-                {
-                    MessageBox.Show("Essa pasta já está existe na biblioteca",
-                        "Pasta já existe");
-                    return;
-                }
-
-                Search.additionalFolders.Add(addDir);
-                MessageBox.Show("O programa vai reiniciar agora", "Reinicialização necessária");
-                Restart();
-            }
-        }
-
-        // Remove folder from library
-        private void RemoveFolderButton_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.Description = "Pasta a ser removida da biblioteca";
-            var dialog = folderBrowserDialog1.ShowDialog();
-
-            if (dialog.Equals(DialogResult.OK))
-            {
-                var removedDir = folderBrowserDialog1.SelectedPath;
-
-                if (!Search.additionalFolders.Contains(removedDir) && !Search.DefaultPaths.Contains(removedDir))
-                {
-                    MessageBox.Show("Essa pasta não está na biblioteca para ser removida",
-                        "Pasta não existe");
-                    return;
-                }
-
-                Search.additionalFolders.Remove(removedDir);
-                MessageBox.Show("O programa vai reiniciar agora", "Reinicialização necessária");
-                Restart();
-            }
-        }
-
-        // Show main Playlist, all musics
-        private void ShowAllMusics(object sender, EventArgs e)
-        {
-
-            if (!mainPanel.Visible)
-            {
-                mainPanel.Visible = true;
-                mainPanel.Enabled = true;
-                TurnOnFormAndCloseOthers(_allMusicsForm);
-            }
-            else
-            {
-                mainPanel.Visible = false;
-                mainPanel.Enabled = false;
-                TurnOffAllForms();
-            }
         }
         #endregion
 
@@ -448,18 +404,10 @@ namespace LiMusicPlayer.Forms
         }
         #endregion
 
-        #region In Class methods
-        // Restart Application
-        private void Restart()
-        {
-            Application.Restart();
-        }
-
         // When closing save data
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Saver.SaveFile();
         }
-        #endregion   
     }
 }

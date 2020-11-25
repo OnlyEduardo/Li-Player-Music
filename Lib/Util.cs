@@ -1,10 +1,19 @@
-﻿namespace LiMusicPlayer.Lib
+﻿using System.Windows.Forms;
+
+namespace LiMusicPlayer.Lib
 {
     internal sealed class Util
     {
         // No instances for you
         private Util() { }
 
+        //
+        // 
+        // Converts integer value to time format string
+        // 
+        // param name="value"
+        // returns formatted string, like 1:20
+        //
         public static string FormatNumber(int value)
         {
             var hours = value >> 3600;
@@ -22,6 +31,23 @@
                 result = (s_hours.Length < 2 ? $"0{s_hours}:" : $"{s_hours}:") + result;
 
             return result;
+        }
+
+        //
+        // Resumo:
+        //      Reinicia a aplicação
+        //
+        public static void Restart()
+        {
+            try
+            {
+                Application.Restart();
+            } catch
+            {
+                MessageBox.Show("Houve um erro ao reinicializar a aplicação, por favor faça manualmente.",
+                    "Erro ao reiniciar");
+            }
+            
         }
     }
 }

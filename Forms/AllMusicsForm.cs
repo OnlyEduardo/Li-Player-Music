@@ -1,12 +1,5 @@
 ﻿using LiMusicPlayer.Lib;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LiMusicPlayer.Forms
@@ -55,6 +48,7 @@ namespace LiMusicPlayer.Forms
                     MainForm.INSTANCE._actualMusic.Stop();
                 }
 
+                MainForm.INSTANCE._currentPosition = 0;
                 MainForm.INSTANCE._actualMusic.CurrentPosition = 0;
                 MainForm.INSTANCE.progressBar.Value = 0;
             }
