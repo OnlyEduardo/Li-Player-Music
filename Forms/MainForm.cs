@@ -29,6 +29,7 @@ namespace LiMusicPlayer.Forms
                 INSTANCE = this;
 
             InitializeComponent();
+            AddToolTipsForLabels();
 
             Saver.LoadFile();
 
@@ -46,6 +47,21 @@ namespace LiMusicPlayer.Forms
         public List<Form> Forms { get; } = new List<Form>();
        
         #region InitializeSystem
+        private void AddToolTipsForLabels()
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.InitialDelay = 1500;
+
+            toolTip.SetToolTip(LoopMusic, "Ativa/Desativa o looping da música atual.");
+            toolTip.SetToolTip(GoBack, "Volta 10 segundos na música atual.");
+            toolTip.SetToolTip(GoToStart, "Volta ao inicio da música, caso esteja no inicio, volta para a música anterior.");
+            toolTip.SetToolTip(PlayStopLabel, "Inicia/Pausa música atual.");
+            toolTip.SetToolTip(GoToNextMusic, "Vai para a próxima música.");
+            toolTip.SetToolTip(Advance, "Avança 10 segundo na música atual.");
+            toolTip.SetToolTip(ShuffleMusic, "Toca as músicas em ordem aleatória");
+            toolTip.SetToolTip(SpeedoMeter, "Acelera música até 4 vezes.");
+        }
+
         // Add external forms to list
         private void PopulateFormsList()
         {
@@ -366,7 +382,7 @@ namespace LiMusicPlayer.Forms
 
             _rate = _rate + 1 > 4 ? 1 : ++_rate;
             if (_actualMusic != null) _actualMusic.Rate(_rate);
-            speedometer.Text = $"{_rate}x";
+            SpeedoMeter.Text = $"{_rate}x";
 
             if(wasEn) timer.Start();
         }

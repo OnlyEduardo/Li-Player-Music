@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panelBottom = new System.Windows.Forms.Panel();
-            this.speedometer = new System.Windows.Forms.Label();
+            this.SpeedoMeter = new System.Windows.Forms.Label();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.Advance = new System.Windows.Forms.Label();
-            this.goBack = new System.Windows.Forms.Label();
+            this.GoBack = new System.Windows.Forms.Label();
             this.ShuffleMusic = new System.Windows.Forms.Label();
             this.GoToNextMusic = new System.Windows.Forms.Label();
             this.PlayStopLabel = new System.Windows.Forms.Label();
@@ -71,7 +71,7 @@
             // panelBottom
             // 
             this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.panelBottom.Controls.Add(this.speedometer);
+            this.panelBottom.Controls.Add(this.SpeedoMeter);
             this.panelBottom.Controls.Add(this.panelButtons);
             this.panelBottom.Controls.Add(this.totalDurationTime);
             this.panelBottom.Controls.Add(this.timeProgressLabel);
@@ -86,24 +86,24 @@
             // 
             // speedometer
             // 
-            this.speedometer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.speedometer.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.speedometer.Font = new System.Drawing.Font("OpenSymbol", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.speedometer.ForeColor = System.Drawing.Color.Red;
-            this.speedometer.Image = global::LiMusicPlayer.Properties.Resources.speedometer_64px;
-            this.speedometer.Location = new System.Drawing.Point(936, 50);
-            this.speedometer.Name = "speedometer";
-            this.speedometer.Size = new System.Drawing.Size(89, 78);
-            this.speedometer.TabIndex = 10;
-            this.speedometer.Text = "1x";
-            this.speedometer.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.speedometer.Click += new System.EventHandler(this.Speedometer_Click);
+            this.SpeedoMeter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SpeedoMeter.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SpeedoMeter.Font = new System.Drawing.Font("OpenSymbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SpeedoMeter.ForeColor = System.Drawing.Color.Red;
+            this.SpeedoMeter.Image = global::LiMusicPlayer.Properties.Resources.speedometer_64px;
+            this.SpeedoMeter.Location = new System.Drawing.Point(936, 50);
+            this.SpeedoMeter.Name = "speedometer";
+            this.SpeedoMeter.Size = new System.Drawing.Size(89, 78);
+            this.SpeedoMeter.TabIndex = 10;
+            this.SpeedoMeter.Text = "1x";
+            this.SpeedoMeter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.SpeedoMeter.Click += new System.EventHandler(this.Speedometer_Click);
             // 
             // panelButtons
             // 
             this.panelButtons.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelButtons.Controls.Add(this.Advance);
-            this.panelButtons.Controls.Add(this.goBack);
+            this.panelButtons.Controls.Add(this.GoBack);
             this.panelButtons.Controls.Add(this.ShuffleMusic);
             this.panelButtons.Controls.Add(this.GoToNextMusic);
             this.panelButtons.Controls.Add(this.PlayStopLabel);
@@ -118,23 +118,31 @@
             // 
             this.Advance.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.Advance.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Advance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Advance.ForeColor = System.Drawing.Color.Red;
             this.Advance.Image = global::LiMusicPlayer.Properties.Resources.sort_right_64px;
             this.Advance.Location = new System.Drawing.Point(520, 9);
             this.Advance.Name = "Advance";
             this.Advance.Size = new System.Drawing.Size(64, 64);
             this.Advance.TabIndex = 7;
+            this.Advance.Text = "10";
+            this.Advance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Advance.Click += new System.EventHandler(this.Advance_Click);
             // 
             // goBack
             // 
-            this.goBack.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.goBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.goBack.Image = global::LiMusicPlayer.Properties.Resources.sort_left_64px;
-            this.goBack.Location = new System.Drawing.Point(130, 9);
-            this.goBack.Name = "goBack";
-            this.goBack.Size = new System.Drawing.Size(64, 64);
-            this.goBack.TabIndex = 6;
-            this.goBack.Click += new System.EventHandler(this.GoBack_Click);
+            this.GoBack.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.GoBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.GoBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GoBack.ForeColor = System.Drawing.Color.Red;
+            this.GoBack.Image = global::LiMusicPlayer.Properties.Resources.sort_left_64px;
+            this.GoBack.Location = new System.Drawing.Point(130, 9);
+            this.GoBack.Name = "goBack";
+            this.GoBack.Size = new System.Drawing.Size(64, 64);
+            this.GoBack.TabIndex = 6;
+            this.GoBack.Text = "10";
+            this.GoBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.GoBack.Click += new System.EventHandler(this.GoBack_Click);
             // 
             // ShuffleMusic
             // 
@@ -145,7 +153,7 @@
             this.ShuffleMusic.Name = "ShuffleMusic";
             this.ShuffleMusic.Size = new System.Drawing.Size(64, 64);
             this.ShuffleMusic.TabIndex = 5;
-            this.ShuffleMusic.Tag = "Tocar músicas aleatóriamente";
+            this.ShuffleMusic.Tag = "";
             // 
             // GoToNextMusic
             // 
@@ -189,7 +197,7 @@
             this.LoopMusic.Name = "LoopMusic";
             this.LoopMusic.Size = new System.Drawing.Size(64, 64);
             this.LoopMusic.TabIndex = 4;
-            this.LoopMusic.Tag = "Reproduzir a mesma música em looping";
+            this.LoopMusic.Tag = "";
             // 
             // totalDurationTime
             // 
@@ -493,7 +501,7 @@
         public System.Windows.Forms.Timer timer;
         public System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.Label speedometer;
+        private System.Windows.Forms.Label SpeedoMeter;
         private System.Windows.Forms.Button buttonPlaylists;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Panel panelEdit;
@@ -502,7 +510,7 @@
         public System.Windows.Forms.Panel panelPlaylists;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label Advance;
-        private System.Windows.Forms.Label goBack;
+        private System.Windows.Forms.Label GoBack;
     }
 }
 

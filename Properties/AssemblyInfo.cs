@@ -7,12 +7,12 @@ using System.Runtime.InteropServices;
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associadas a um assembly.
 [assembly: AssemblyTitle("Li Music Player")]
-[assembly: AssemblyDescription("Li Music Player is a freeware, you can play your musics.")]
+[assembly: AssemblyDescription("Li Music Player is a freeware, that you can play your musics.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Swellshinider's Production")]
 [assembly: AssemblyProduct("Li Music Player")]
 [assembly: AssemblyCopyright("Copyright ©  2020 - Eduardo Ribeiro leal")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Eduardo's Product")]
 [assembly: AssemblyCulture("")]
 
 // Definir ComVisible como false torna os tipos neste assembly invisíveis
