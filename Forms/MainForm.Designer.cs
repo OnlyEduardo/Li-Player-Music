@@ -48,13 +48,13 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.sidePanel = new System.Windows.Forms.Panel();
             this.buttonLibrary = new System.Windows.Forms.Button();
+            this.buttonPlaylists = new System.Windows.Forms.Button();
             this.buttonAllMusics = new System.Windows.Forms.Button();
             this.buttonAbout = new System.Windows.Forms.Button();
             this.Logolabel = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.byLabel = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.buttonPlaylists = new System.Windows.Forms.Button();
             this.panelBottom.SuspendLayout();
             this.panelButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
@@ -245,12 +245,15 @@
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.progressBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.progressBar.Location = new System.Drawing.Point(88, 147);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(893, 17);
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 0;
+            this.progressBar.Click += new System.EventHandler(this.ClickedInProgressBar);
+            this.progressBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.UpdateMousePosition_MouseMove);
             // 
             // timer
             // 
@@ -288,6 +291,24 @@
             this.buttonLibrary.Text = "Biblioteca";
             this.buttonLibrary.UseVisualStyleBackColor = true;
             this.buttonLibrary.Click += new System.EventHandler(this.ButtonLibrary_Click);
+            // 
+            // buttonPlaylists
+            // 
+            this.buttonPlaylists.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(5)))), ((int)(((byte)(17)))));
+            this.buttonPlaylists.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonPlaylists.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonPlaylists.FlatAppearance.BorderSize = 0;
+            this.buttonPlaylists.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlaylists.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPlaylists.ForeColor = System.Drawing.Color.White;
+            this.buttonPlaylists.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonPlaylists.Location = new System.Drawing.Point(0, 211);
+            this.buttonPlaylists.Name = "buttonPlaylists";
+            this.buttonPlaylists.Size = new System.Drawing.Size(250, 50);
+            this.buttonPlaylists.TabIndex = 7;
+            this.buttonPlaylists.Text = "Playlists";
+            this.buttonPlaylists.UseVisualStyleBackColor = false;
+            this.buttonPlaylists.Click += new System.EventHandler(this.ButtonPlaylists_Click);
             // 
             // buttonAllMusics
             // 
@@ -372,23 +393,6 @@
             this.mainPanel.Size = new System.Drawing.Size(1112, 602);
             this.mainPanel.TabIndex = 5;
             this.mainPanel.Visible = false;
-            // 
-            // buttonPlaylists
-            // 
-            this.buttonPlaylists.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(5)))), ((int)(((byte)(17)))));
-            this.buttonPlaylists.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonPlaylists.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonPlaylists.FlatAppearance.BorderSize = 0;
-            this.buttonPlaylists.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPlaylists.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPlaylists.ForeColor = System.Drawing.Color.White;
-            this.buttonPlaylists.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonPlaylists.Location = new System.Drawing.Point(0, 211);
-            this.buttonPlaylists.Name = "buttonPlaylists";
-            this.buttonPlaylists.Size = new System.Drawing.Size(250, 50);
-            this.buttonPlaylists.TabIndex = 7;
-            this.buttonPlaylists.Text = "Playlists";
-            this.buttonPlaylists.UseVisualStyleBackColor = false;
             // 
             // MainForm
             // 

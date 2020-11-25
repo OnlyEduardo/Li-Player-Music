@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using LiMusicPlayer.Forms;
+using System.Windows.Forms;
 
 namespace LiMusicPlayer.Lib
 {
@@ -7,13 +8,6 @@ namespace LiMusicPlayer.Lib
         // No instances for you
         private Util() { }
 
-        //
-        // 
-        // Converts integer value to time format string
-        // 
-        // param name="value"
-        // returns formatted string, like 1:20
-        //
         public static string FormatNumber(int value)
         {
             var hours = value >> 3600;
@@ -33,10 +27,6 @@ namespace LiMusicPlayer.Lib
             return result;
         }
 
-        //
-        // Resumo:
-        //      Reinicia a aplicação
-        //
         public static void Restart()
         {
             try
@@ -48,6 +38,28 @@ namespace LiMusicPlayer.Lib
                     "Erro ao reiniciar");
             }
             
+        }
+
+        public static void SetPanelStatus(Panel panel, bool status)
+        {
+            panel.Visible = status;
+            panel.Enabled = status;
+        }
+
+        public static void ActiveDeactivePanelAndForm(Panel mainPanel, Form form)
+        {
+            if (mainPanel.Visible && form.Visible)
+            {
+                SetPanelStatus(mainPanel, false);
+                MainForm.INSTANCE.TurnOffAllForms();
+            }
+            else
+            {
+                if (!mainPanel.Visible)
+                    SetPanelStatus(mainPanel, true);
+
+                MainForm.INSTANCE.TurnOnFormAndCloseOthers(form);
+            }
         }
     }
 }

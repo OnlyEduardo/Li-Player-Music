@@ -12,3 +12,4 @@ C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusic
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Forms.AllMusicsForm.resources
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.csprojAssemblyReference.cache
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Forms.LibraryForm.resources
+C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Forms.PlaylistForm.resources

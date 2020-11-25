@@ -55,7 +55,6 @@
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.updateButton);
             this.panel1.Controls.Add(this.addFolderButton);
             this.panel1.Controls.Add(this.removeFolderButton);
@@ -72,7 +71,7 @@
             this.updateButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.updateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updateButton.ForeColor = System.Drawing.Color.White;
-            this.updateButton.Location = new System.Drawing.Point(0, 3);
+            this.updateButton.Location = new System.Drawing.Point(0, 4);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(148, 45);
             this.updateButton.TabIndex = 12;
@@ -87,12 +86,12 @@
             this.addFolderButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addFolderButton.Font = new System.Drawing.Font("Mongolian Baiti", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addFolderButton.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.addFolderButton.Location = new System.Drawing.Point(1002, 3);
+            this.addFolderButton.Location = new System.Drawing.Point(1010, 4);
             this.addFolderButton.Name = "addFolderButton";
-            this.addFolderButton.Size = new System.Drawing.Size(45, 45);
+            this.addFolderButton.Size = new System.Drawing.Size(48, 45);
             this.addFolderButton.TabIndex = 10;
             this.addFolderButton.Text = "+";
-            this.addFolderButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.addFolderButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.addFolderButton.Click += new System.EventHandler(this.AddFolderButton_Click);
             // 
             // removeFolderButton
@@ -102,7 +101,7 @@
             this.removeFolderButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.removeFolderButton.Font = new System.Drawing.Font("Mongolian Baiti", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeFolderButton.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.removeFolderButton.Location = new System.Drawing.Point(1062, 3);
+            this.removeFolderButton.Location = new System.Drawing.Point(1064, 4);
             this.removeFolderButton.Name = "removeFolderButton";
             this.removeFolderButton.Size = new System.Drawing.Size(45, 45);
             this.removeFolderButton.TabIndex = 11;

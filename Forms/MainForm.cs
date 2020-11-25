@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LiMusicPlayer.Forms
@@ -11,18 +12,24 @@ namespace LiMusicPlayer.Forms
         public static MainForm INSTANCE;
 
         public Music _actualMusic = null;
-
         public int _currentPosition = 0;
         public int _lastDuration = 100;
         public int _actualIndex = 0;
         public int _actualVolume = 50;
-        public int _rate = 1;
-        
+        public int _rate = 1;     
         public bool _isPlaying = false;
-        
+
+        // Private vars
+        private int _mousePos = 0;
+
+        // Colors
+        private readonly Color _normalButtonColor = Color.FromArgb(17, 5, 17);
+        private readonly Color _selectedButtonColor = Color.Indigo;
+
         // Declaration of external forms
         private readonly AllMusicsForm _allMusicsForm = new AllMusicsForm();
         private readonly LibraryForm _libraryForm = new LibraryForm();
+        private readonly PlaylistForm _playlistForm = new PlaylistForm();
 
         public MainForm()
         {
@@ -31,6 +38,7 @@ namespace LiMusicPlayer.Forms
 
             InitializeComponent();
             AddToolTipsForLabels();
+            PopulateButtonsList();
 
             Saver.LoadFile();
 
@@ -47,8 +55,10 @@ namespace LiMusicPlayer.Forms
         public List<Playlist> Playlists { get; } = new List<Playlist>();
         public List<Music> MusicsList { get; } = new List<Music>();
         public List<Form> Forms { get; } = new List<Form>();
-       
+        public List<Button> Buttons { get; } = new List<Button>();
+
         #region InitializeSystem
+        // Set tooltips for player buttons
         private void AddToolTipsForLabels()
         {
             ToolTip toolTip = new ToolTip
@@ -66,11 +76,20 @@ namespace LiMusicPlayer.Forms
             toolTip.SetToolTip(SpeedoMeter, "Acelera música até 4 vezes.");
         }
 
+        // Populate the buttons list
+        private void PopulateButtonsList()
+        {
+            Buttons.Add(buttonAllMusics);
+            Buttons.Add(buttonPlaylists);
+            Buttons.Add(buttonLibrary);
+        }
+
         // Add external forms to list
         private void PopulateFormsList()
         {
             Forms.Add(_allMusicsForm);
             Forms.Add(_libraryForm);
+            Forms.Add(_playlistForm);
         }
 
         // Set visible and enable to false, for all External Forms
@@ -98,15 +117,15 @@ namespace LiMusicPlayer.Forms
         // Apply the track bar last value, stop the timer and set actual music name in label
         private void SetLoadedData()
         {      
-            trackBar.Value = _actualVolume / 10;
-            progressBar.Maximum = _lastDuration;
+            trackBar.Value = _actualVolume / 10;        
             timer.Stop();
 
             try
             {
-                progressBar.Value = _currentPosition;
-                timeProgressLabel.Text = Util.FormatNumber(_currentPosition);
                 labelActualMusic.Text = MusicsList[_actualIndex].ToString();
+                progressBar.Maximum = _lastDuration;
+                progressBar.Value = _currentPosition;
+                timeProgressLabel.Text = Util.FormatNumber(_currentPosition);            
             } catch (ArgumentOutOfRangeException) {
                 labelActualMusic.Text = MusicsList[0].ToString();
             }
@@ -119,42 +138,30 @@ namespace LiMusicPlayer.Forms
         {
             mainPanel.Visible = false;
             mainPanel.Enabled = false;
+            TurnOffAllForms();
         }
 
         // Show main Playlist, all musics
         private void ShowAllMusics_Click(object sender, EventArgs e)
         {
-            if (!mainPanel.Visible)
-            {
-                mainPanel.Visible = true;
-                mainPanel.Enabled = true;
-                TurnOnFormAndCloseOthers(_allMusicsForm);
-            }
-            else
-            {
-                mainPanel.Visible = false;
-                mainPanel.Enabled = false;
-                TurnOffAllForms();
-            }     
+            Util.ActiveDeactivePanelAndForm(mainPanel, _allMusicsForm);
+            ButtonStyle(buttonAllMusics);
+        }
+
+        // Show playlists
+        private void ButtonPlaylists_Click(object sender, EventArgs e)
+        {
+            Util.ActiveDeactivePanelAndForm(mainPanel, _playlistForm);
+            ButtonStyle(buttonPlaylists);
         }
 
         // Open/Close library panel
         private void ButtonLibrary_Click(object sender, EventArgs e)
         {
-            if (!mainPanel.Visible)
-            {
-                mainPanel.Visible = true;
-                mainPanel.Enabled = true;
-                TurnOnFormAndCloseOthers(_libraryForm);
-            }
-            else
-            {
-                mainPanel.Visible = false;
-                mainPanel.Enabled = false;
-                TurnOffAllForms();
-            }
+            Util.ActiveDeactivePanelAndForm(mainPanel, _libraryForm);
+            ButtonStyle(buttonLibrary);
         }
-        
+
         // Open in default browser the link of my site
         private void OpenMySite(object sender, EventArgs e)
         {
@@ -344,7 +351,6 @@ namespace LiMusicPlayer.Forms
         }
         #endregion
 
-        #region Derive methods
         // Update progressBar
         private void TimerTick(object sender, EventArgs e)
         {
@@ -377,7 +383,7 @@ namespace LiMusicPlayer.Forms
         }
         
         // Turn off all forms
-        private void TurnOffAllForms()
+        public void TurnOffAllForms()
         {
             foreach (var form in Forms)
             {
@@ -387,7 +393,7 @@ namespace LiMusicPlayer.Forms
         }
 
         // Turn off all forms and activate the excepted Form
-        private void TurnOnFormAndCloseOthers(Form exceptedForm)
+        public void TurnOnFormAndCloseOthers(Form exceptedForm)
         {
             foreach(var form in Forms)
             {
@@ -402,12 +408,69 @@ namespace LiMusicPlayer.Forms
                 form.Enabled = false;
             }
         }
-        #endregion
 
         // When closing save data
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Saver.SaveFile();
+        }
+
+        // Set button color
+        private void ButtonStyle(Button button)
+        {
+            foreach (var btn in Buttons)
+            {
+                if (button.Equals(btn))
+                {
+                    button.BackColor = button.BackColor.Equals(_selectedButtonColor)
+                           ? _normalButtonColor
+                           : _selectedButtonColor;
+                }
+                else
+                {
+                    btn.BackColor = _normalButtonColor;
+                }
+            }
+        }
+
+        // When Mouse click in progress bar
+        private void ClickedInProgressBar(object sender, EventArgs e)
+        {
+            var isP = _isPlaying;
+
+            if (isP)
+                PlayStopButtonClick(sender, e);
+
+            var pos = GetMouseConverted();
+
+            _currentPosition = pos;
+            progressBar.Value = pos;
+            timeProgressLabel.Text = Util.FormatNumber(pos);
+
+            if (isP)
+                PlayStopButtonClick(sender, e);
+        }
+
+        // Update mouse position
+        private void UpdateMousePosition_MouseMove(object sender, MouseEventArgs e)
+        {
+            _mousePos = e.X;
+        }
+
+        // Get mouse position converted to progress bar units
+        private int GetMouseConverted()
+        {
+            var maxVal = progressBar.Maximum;
+
+            var relativePos = (100 * progressBar.Width) / maxVal;
+            var result = (100 * _mousePos) / relativePos;
+
+            if (result >= maxVal)
+                result = maxVal - 1;
+            else if (result <= progressBar.Minimum)
+                result = progressBar.Minimum + 1;
+
+            return result;
         }
     }
 }
