@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace LiMusicPlayer.Forms
 {
-    public partial class AllMusics : Form
+    public partial class AllMusicsForm : Form
     {
-        public static AllMusics INSTANCE;
+        public static AllMusicsForm INSTANCE;
 
-        public AllMusics()
+        public AllMusicsForm()
         {
             if (INSTANCE == null)
                 INSTANCE = this;

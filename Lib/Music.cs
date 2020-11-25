@@ -22,10 +22,27 @@ namespace LiMusicPlayer.Lib
             {
                 var time = Player.currentMedia.durationString;
 
-                var p1 = time.Split(':')[0];
-                var p2 = time.Split(':')[1];
+                string minutes, seconds;
 
-                return (int.Parse(p1) * 60) + int.Parse(p2);
+                try
+                {
+                    var hours = time.Split(':')[0];
+                    minutes = time.Split(':')[1];
+                    seconds = time.Split(':')[2];
+
+                    return (int.Parse(hours) * 60 * 60) + (int.Parse(minutes) * 60) + int.Parse(seconds);
+
+                } catch (IndexOutOfRangeException)
+                {
+                    minutes = time.Split(':')[0];
+                    seconds = time.Split(':')[1];
+
+                    return (int.Parse(minutes) * 60) + int.Parse(seconds);
+                } catch
+                {
+                    Console.WriteLine("Error level max. Music(class) Duration parameter.");
+                    return (int) Player.currentMedia.duration;
+                }  
             }
         }
 

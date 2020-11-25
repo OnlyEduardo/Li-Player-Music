@@ -21,7 +21,7 @@ namespace LiMusicPlayer.Lib
         private static string Path5 => $"{DefaultPathRoot}OneDrive\\Documents";
         private static string Path6 => $"{DefaultPathRoot}OneDrive\\Music";
         private static string Path7 => $"{DefaultPathRoot}OneDrive\\Videos";
-
+        
         public static List<string> GetMusicsPaths()
         {
             var directories = GetDirectories();
@@ -50,16 +50,18 @@ namespace LiMusicPlayer.Lib
 
         private static List<string> GetDirectories() 
         {
-            var directories = new List<string>()
-            {
-                Path1, Path2, Path3, Path4,
-                Path5, Path6, Path7, 
-            };
+            var directories = DefaultPaths;
 
             if(additionalFolders.Any())
                 directories.AddRange(additionalFolders);
 
             return directories;
         }
+
+        public static List<string> DefaultPaths => new List<string>()
+        {
+            Path1, Path2, Path3, Path4,
+            Path5, Path6, Path7,
+        };
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace LiMusicPlayer.Forms
 {
-    partial class AllMusics
+    partial class AllMusicsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -68,13 +68,13 @@
             this.listBox.ForeColor = System.Drawing.Color.White;
             this.listBox.FormattingEnabled = true;
             this.listBox.ItemHeight = 31;
-            this.listBox.Location = new System.Drawing.Point(0, 102);
+            this.listBox.Location = new System.Drawing.Point(0, 71);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(1112, 498);
+            this.listBox.Size = new System.Drawing.Size(1112, 529);
             this.listBox.TabIndex = 7;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
-            // AllMusics
+            // AllMusicsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -85,7 +85,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "AllMusics";
+            this.Name = "AllMusicsForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

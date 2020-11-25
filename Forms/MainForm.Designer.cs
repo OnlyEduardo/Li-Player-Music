@@ -33,6 +33,8 @@
             this.panelBottom = new System.Windows.Forms.Panel();
             this.speedometer = new System.Windows.Forms.Label();
             this.panelButtons = new System.Windows.Forms.Panel();
+            this.Advance = new System.Windows.Forms.Label();
+            this.goBack = new System.Windows.Forms.Label();
             this.ShuffleMusic = new System.Windows.Forms.Label();
             this.GoToNextMusic = new System.Windows.Forms.Label();
             this.PlayStopLabel = new System.Windows.Forms.Label();
@@ -54,8 +56,8 @@
             this.buttonPlaylists = new System.Windows.Forms.Button();
             this.buttonAbout = new System.Windows.Forms.Button();
             this.Logolabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.TitleLabel = new System.Windows.Forms.Label();
+            this.byLabel = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panelBottom.SuspendLayout();
@@ -100,6 +102,8 @@
             // panelButtons
             // 
             this.panelButtons.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelButtons.Controls.Add(this.Advance);
+            this.panelButtons.Controls.Add(this.goBack);
             this.panelButtons.Controls.Add(this.ShuffleMusic);
             this.panelButtons.Controls.Add(this.GoToNextMusic);
             this.panelButtons.Controls.Add(this.PlayStopLabel);
@@ -110,6 +114,28 @@
             this.panelButtons.Size = new System.Drawing.Size(735, 78);
             this.panelButtons.TabIndex = 9;
             // 
+            // Advance
+            // 
+            this.Advance.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.Advance.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Advance.Image = global::LiMusicPlayer.Properties.Resources.sort_right_64px;
+            this.Advance.Location = new System.Drawing.Point(520, 9);
+            this.Advance.Name = "Advance";
+            this.Advance.Size = new System.Drawing.Size(64, 64);
+            this.Advance.TabIndex = 7;
+            this.Advance.Click += new System.EventHandler(this.Advance_Click);
+            // 
+            // goBack
+            // 
+            this.goBack.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.goBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.goBack.Image = global::LiMusicPlayer.Properties.Resources.sort_left_64px;
+            this.goBack.Location = new System.Drawing.Point(130, 9);
+            this.goBack.Name = "goBack";
+            this.goBack.Size = new System.Drawing.Size(64, 64);
+            this.goBack.TabIndex = 6;
+            this.goBack.Click += new System.EventHandler(this.GoBack_Click);
+            // 
             // ShuffleMusic
             // 
             this.ShuffleMusic.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -119,13 +145,14 @@
             this.ShuffleMusic.Name = "ShuffleMusic";
             this.ShuffleMusic.Size = new System.Drawing.Size(64, 64);
             this.ShuffleMusic.TabIndex = 5;
+            this.ShuffleMusic.Tag = "Tocar músicas aleatóriamente";
             // 
             // GoToNextMusic
             // 
             this.GoToNextMusic.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.GoToNextMusic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.GoToNextMusic.Image = global::LiMusicPlayer.Properties.Resources.end_48px;
-            this.GoToNextMusic.Location = new System.Drawing.Point(521, 9);
+            this.GoToNextMusic.Location = new System.Drawing.Point(400, 9);
             this.GoToNextMusic.Name = "GoToNextMusic";
             this.GoToNextMusic.Size = new System.Drawing.Size(64, 64);
             this.GoToNextMusic.TabIndex = 2;
@@ -136,9 +163,9 @@
             this.PlayStopLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.PlayStopLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PlayStopLabel.Image = global::LiMusicPlayer.Properties.Resources.play_64px;
-            this.PlayStopLabel.Location = new System.Drawing.Point(300, 9);
+            this.PlayStopLabel.Location = new System.Drawing.Point(320, 9);
             this.PlayStopLabel.Name = "PlayStopLabel";
-            this.PlayStopLabel.Size = new System.Drawing.Size(135, 64);
+            this.PlayStopLabel.Size = new System.Drawing.Size(74, 64);
             this.PlayStopLabel.TabIndex = 1;
             this.PlayStopLabel.Click += new System.EventHandler(this.PlayStopButtonClick);
             // 
@@ -147,7 +174,7 @@
             this.GoToStart.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.GoToStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.GoToStart.Image = global::LiMusicPlayer.Properties.Resources.skip_to_start_48px;
-            this.GoToStart.Location = new System.Drawing.Point(150, 9);
+            this.GoToStart.Location = new System.Drawing.Point(250, 9);
             this.GoToStart.Name = "GoToStart";
             this.GoToStart.Size = new System.Drawing.Size(64, 64);
             this.GoToStart.TabIndex = 3;
@@ -162,6 +189,7 @@
             this.LoopMusic.Name = "LoopMusic";
             this.LoopMusic.Size = new System.Drawing.Size(64, 64);
             this.LoopMusic.TabIndex = 4;
+            this.LoopMusic.Tag = "Reproduzir a mesma música em looping";
             // 
             // totalDurationTime
             // 
@@ -254,6 +282,7 @@
             this.panelEdit.Name = "panelEdit";
             this.panelEdit.Size = new System.Drawing.Size(250, 100);
             this.panelEdit.TabIndex = 7;
+            this.panelEdit.Visible = false;
             // 
             // removeFolderButton
             // 
@@ -314,6 +343,7 @@
             this.panelPlaylists.Name = "panelPlaylists";
             this.panelPlaylists.Size = new System.Drawing.Size(250, 50);
             this.panelPlaylists.TabIndex = 5;
+            this.panelPlaylists.Visible = false;
             // 
             // buttonAllMusics
             // 
@@ -376,32 +406,32 @@
             this.Logolabel.TabIndex = 1;
             this.Logolabel.Click += new System.EventHandler(this.Logolabel_Click);
             // 
-            // label1
+            // TitleLabel
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label1.Location = new System.Drawing.Point(250, 0);
-            this.label1.Name = "label1";
-            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label1.Size = new System.Drawing.Size(1112, 369);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Li Music Player\r\n\r\n";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.TitleLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.TitleLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.ForeColor = System.Drawing.Color.White;
+            this.TitleLabel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.TitleLabel.Location = new System.Drawing.Point(250, 0);
+            this.TitleLabel.Name = "TitleLabel";
+            this.TitleLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TitleLabel.Size = new System.Drawing.Size(1112, 369);
+            this.TitleLabel.TabIndex = 3;
+            this.TitleLabel.Text = "Li Music Player\r\n\r\n";
+            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // label2
+            // byLabel
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(250, 369);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1112, 75);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Feito por: Eduardo Ribeiro Leal";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.byLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.byLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.byLabel.ForeColor = System.Drawing.Color.White;
+            this.byLabel.Location = new System.Drawing.Point(250, 369);
+            this.byLabel.Name = "byLabel";
+            this.byLabel.Size = new System.Drawing.Size(1112, 75);
+            this.byLabel.TabIndex = 4;
+            this.byLabel.Text = "Feito por: Eduardo Ribeiro Leal";
+            this.byLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // mainPanel
             // 
@@ -421,8 +451,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(1362, 773);
             this.Controls.Add(this.mainPanel);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.byLabel);
+            this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.sidePanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -457,8 +487,8 @@
         private System.Windows.Forms.Panel panelButtons;
         public System.Windows.Forms.Label timeProgressLabel;
         public System.Windows.Forms.Label totalDurationTime;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label TitleLabel;
+        private System.Windows.Forms.Label byLabel;
         private System.Windows.Forms.Button buttonAbout;
         public System.Windows.Forms.Timer timer;
         public System.Windows.Forms.ProgressBar progressBar;
@@ -471,6 +501,8 @@
         private System.Windows.Forms.Button addFolderButton;
         public System.Windows.Forms.Panel panelPlaylists;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Label Advance;
+        private System.Windows.Forms.Label goBack;
     }
 }
 
