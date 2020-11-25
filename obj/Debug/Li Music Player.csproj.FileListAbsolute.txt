@@ -10,6 +10,5 @@ C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\bin\Debug\AxInter
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.csproj.CopyComplete
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Forms.MainForm.resources
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Forms.AllMusicsForm.resources
-C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\Li Music Player.csprojAssemblyReference.cache
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Forms.LibraryForm.resources
 C:\Users\dute2\OneDrive\Documentos\Projetos C#\Li Music Player\obj\Debug\LiMusicPlayer.Forms.PlaylistForm.resources

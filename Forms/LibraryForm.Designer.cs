@@ -31,11 +31,11 @@
             this.panelAllMusics = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.updateButton = new System.Windows.Forms.Label();
-            this.addFolderButton = new System.Windows.Forms.Label();
             this.removeFolderButton = new System.Windows.Forms.Label();
             this.listBox = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.addFolderButton = new System.Windows.Forms.Label();
             this.panelAllMusics.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -79,21 +79,6 @@
             this.updateButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.updateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
-            // addFolderButton
-            // 
-            this.addFolderButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.addFolderButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.addFolderButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addFolderButton.Font = new System.Drawing.Font("Mongolian Baiti", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addFolderButton.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.addFolderButton.Location = new System.Drawing.Point(1010, 4);
-            this.addFolderButton.Name = "addFolderButton";
-            this.addFolderButton.Size = new System.Drawing.Size(48, 45);
-            this.addFolderButton.TabIndex = 10;
-            this.addFolderButton.Text = "+";
-            this.addFolderButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.addFolderButton.Click += new System.EventHandler(this.AddFolderButton_Click);
-            // 
             // removeFolderButton
             // 
             this.removeFolderButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -101,11 +86,11 @@
             this.removeFolderButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.removeFolderButton.Font = new System.Drawing.Font("Mongolian Baiti", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeFolderButton.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.removeFolderButton.Image = global::LiMusicPlayer.Properties.Resources.subtract_32px;
             this.removeFolderButton.Location = new System.Drawing.Point(1064, 4);
             this.removeFolderButton.Name = "removeFolderButton";
             this.removeFolderButton.Size = new System.Drawing.Size(45, 45);
             this.removeFolderButton.TabIndex = 11;
-            this.removeFolderButton.Text = "-";
             this.removeFolderButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.removeFolderButton.Click += new System.EventHandler(this.RemoveFolderButton_Click);
             // 
@@ -135,6 +120,21 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Sua Biblioteca de pastas";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // addFolderButton
+            // 
+            this.addFolderButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.addFolderButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.addFolderButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addFolderButton.Font = new System.Drawing.Font("Mongolian Baiti", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addFolderButton.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.addFolderButton.Image = global::LiMusicPlayer.Properties.Resources.plus_math_32px;
+            this.addFolderButton.Location = new System.Drawing.Point(1010, 4);
+            this.addFolderButton.Name = "addFolderButton";
+            this.addFolderButton.Size = new System.Drawing.Size(48, 45);
+            this.addFolderButton.TabIndex = 10;
+            this.addFolderButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.addFolderButton.Click += new System.EventHandler(this.AddFolderButton_Click);
             // 
             // LibraryForm
             // 
