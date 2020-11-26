@@ -143,9 +143,9 @@ namespace LiMusicPlayer.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sort_left_64px {
+        internal static System.Drawing.Bitmap sort_left_48px {
             get {
-                object obj = ResourceManager.GetObject("sort_left_64px", resourceCulture);
+                object obj = ResourceManager.GetObject("sort_left_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +153,9 @@ namespace LiMusicPlayer.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sort_right_64px {
+        internal static System.Drawing.Bitmap sort_right_48px {
             get {
-                object obj = ResourceManager.GetObject("sort_right_64px", resourceCulture);
+                object obj = ResourceManager.GetObject("sort_right_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
