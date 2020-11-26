@@ -45,7 +45,7 @@ namespace LiMusicPlayer.Forms
             PopulateFormsList();
             HideAllExternalForms();
             InitializeMusicsList();
-            SetLoadedData();         
+            SetLoadedData();
 
             // Load Form Initializators
             AllMusicsForm.INSTANCE.PopulateListOfAllMusic();
@@ -101,7 +101,8 @@ namespace LiMusicPlayer.Forms
                 form.Enabled = false;
                 form.TopLevel = false;
                 form.Dock = DockStyle.Fill;
-                mainPanel.Controls.Add(form);     
+
+                mainPanel.Controls.Add(form);
             }
         }
 
@@ -120,6 +121,15 @@ namespace LiMusicPlayer.Forms
             trackBar.Value = _actualVolume / 10;        
             timer.Stop();
 
+            if(MusicsList.Count <= 0)
+            {
+                labelActualMusic.Text = "";
+                progressBar.Value = 0;
+                progressBar.Maximum = 100;
+                timeProgressLabel.Text = Util.FormatNumber(0);
+                return;
+            }
+
             try
             {
                 labelActualMusic.Text = MusicsList[_actualIndex].ToString();
@@ -128,7 +138,7 @@ namespace LiMusicPlayer.Forms
                 timeProgressLabel.Text = Util.FormatNumber(_currentPosition);            
             } catch (ArgumentOutOfRangeException) {
                 labelActualMusic.Text = MusicsList[0].ToString();
-            }
+            } 
         }
         #endregion
 
@@ -181,6 +191,8 @@ namespace LiMusicPlayer.Forms
         // Play Stop actual music
         public void PlayStopButtonClick(object sender, EventArgs e)
         {
+            if (IsMusicListVoided()) return;
+           
             _isPlaying = !_isPlaying;
 
             PlayStopLabel.Image = _isPlaying ? Properties.Resources.pause_64px : Properties.Resources.play_64px;
@@ -188,7 +200,8 @@ namespace LiMusicPlayer.Forms
             try
             {
                 _actualMusic = MusicsList[_actualIndex];
-            } catch
+            }
+            catch
             {
                 _actualIndex = 0;
                 _actualMusic = MusicsList[0];
@@ -198,19 +211,19 @@ namespace LiMusicPlayer.Forms
             _actualMusic.Volume(_actualVolume);
             _actualMusic.Rate(_rate);
             _actualMusic.CurrentPosition = _currentPosition;
-            
+
             if (_isPlaying)
             {
                 _actualMusic.Play();
                 timer.Start();
-            }           
+            }
             else
             {
                 _actualMusic.Stop();
                 timer.Stop();
             }
 
-            for(var i = 0; i < AllMusicsForm.INSTANCE.listBox.Items.Count; i++)
+            for (var i = 0; i < AllMusicsForm.INSTANCE.listBox.Items.Count; i++)
                 AllMusicsForm.INSTANCE.listBox.SetSelected(i, false);
 
             labelActualMusic.Text = _actualMusic.ToString();
@@ -219,6 +232,8 @@ namespace LiMusicPlayer.Forms
         // Return 10 seconds
         private void GoBack_Click(object sender, EventArgs e)
         {
+            if (IsMusicListVoided()) return;
+
             var isP = _isPlaying;
 
             if(_currentPosition <= 10)
@@ -246,6 +261,8 @@ namespace LiMusicPlayer.Forms
         // Go to start or go to previous 
         private void GoToStart_Click(object sender, EventArgs e)
         {
+            if (IsMusicListVoided()) return;
+
             timer.Stop();
             _currentPosition = 0;
 
@@ -277,6 +294,8 @@ namespace LiMusicPlayer.Forms
         // Go to next music
         private void GoToNextMusic_Click(object sender, EventArgs e)
         {
+            if (IsMusicListVoided()) return;
+
             _currentPosition = 0;
 
             // Stop timer and reset progressBar
@@ -302,6 +321,8 @@ namespace LiMusicPlayer.Forms
         // Advance 10 seconds
         private void Advance_Click(object sender, EventArgs e)
         {
+            if (IsMusicListVoided()) return;
+
             var isP = _isPlaying;
 
             if (_currentPosition + 10 >= _lastDuration)
@@ -330,6 +351,8 @@ namespace LiMusicPlayer.Forms
         // Update volume
         private void TrackBarScrolling(object sender, EventArgs e)
         {
+            if (IsMusicListVoided()) return;
+
             _actualVolume = trackBar.Value * 10;
 
             if (_actualMusic != null)
@@ -471,6 +494,19 @@ namespace LiMusicPlayer.Forms
                 result = progressBar.Minimum + 1;
 
             return result;
+        }
+
+        // Verifica se a lista de músicas está vazia
+        private bool IsMusicListVoided()
+        {
+            if (MusicsList.Count <= 0)
+            {
+                MessageBox.Show("Nenhuma música foi encontrada, tente adicionar em bibliotecas",
+                    "Nenhuma música encontrada");
+                return true;
+            }
+
+            return false;
         }
     }
 }

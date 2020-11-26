@@ -7,6 +7,9 @@ namespace LiMusicPlayer.Lib
 {
     internal sealed class Search
     {
+        /* No instances for u*/
+        private Search() { }
+
         public static string UserName => Environment.UserName;
         public static string HDName => Environment.GetLogicalDrives()[0];
         public static List<string> additionalFolders = new List<string>();
@@ -48,20 +51,20 @@ namespace LiMusicPlayer.Lib
             return musicsPaths;
         }
 
-        private static List<string> GetDirectories() 
-        {
-            var directories = DefaultPaths;
-
-            if(additionalFolders.Any())
-                directories.AddRange(additionalFolders);
-
-            return directories;
-        }
-
         public static List<string> DefaultPaths => new List<string>()
         {
             Path1, Path2, Path3, Path4,
             Path5, Path6, Path7,
         };
+
+        private static List<string> GetDirectories()
+        {
+            var directories = DefaultPaths;
+
+            if (additionalFolders.Any())
+                directories.AddRange(additionalFolders);
+
+            return directories;
+        }
     }
 }
